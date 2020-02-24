@@ -1,11 +1,8 @@
 
 class Oystercard
 
+attr_reader :balance
   def initialize
-
-  end
-
-  def balance
-
+    @balance = 0
   end
 end

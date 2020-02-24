@@ -1,8 +1,10 @@
 require 'oystercard'
 
 describe Oystercard do
-  it 'has a balance of zero' do
-  card = Oystercard.new
-  expect(card).to respond_to(:balance)
+
+  it 'creates a card with a balance of 0' do
+    card = Oystercard.new
+    expect(card.balance).to eq(0)
   end
+
 end
