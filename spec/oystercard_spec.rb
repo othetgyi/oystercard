@@ -18,4 +18,10 @@ describe Oystercard do
     expect { card.top_up(0.01) }.to raise_error 'Maximum balance is £90'
   end
 
+  describe "#deduct" do
+    it 'subtracts money from the balance' do
+      card = Oystercard.new
+      expect(card.deduct(2)).to eq(-2)
+    end
+  end
 end
