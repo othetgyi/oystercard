@@ -18,6 +18,23 @@ describe Oystercard do
     expect { card.top_up(0.01) }.to raise_error 'Maximum balance is £90'
   end
 
+  it 'is initially not in a journey' do
+    card = Oystercard.new
+    expect(card).not_to be_in_journey
+  end
+
+  it "can touch in" do
+    card = Oystercard.new
+    card.touch_in
+    expect(card).to be_in_journey
+  end
+
+  it "can touch out" do
+    card = Oystercard.new
+    card.touch_out
+    expect(card).not_to be_in_journey
+  end
+
   describe "#deduct" do
     it 'subtracts money from the balance' do
       card = Oystercard.new
