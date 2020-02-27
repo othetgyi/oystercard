@@ -28,7 +28,7 @@ describe Oystercard do
 
     it 'will not touch in if below minimum balance' do
       card = Oystercard.new
-      expect{ card.touch_in }.to raise_error 'Insufficient balance to touch in'
+      expect{ card.touch_in("Farringdon") }.to raise_error 'Insufficient balance to touch in'
     end
 
 
@@ -41,7 +41,7 @@ end
   describe "#touch_out" do
     it "can touch out" do
       card = Oystercard.new
-      card.touch_out
+      card.touch_out("nil")
       expect(card).not_to be_in_journey
     end
 
@@ -49,7 +49,7 @@ end
 
     it "substracts £4 from the balance when you touch out" do
       card = Oystercard.new
-      expect{ card.touch_out }.to change{card.balance}.by (-4)
+      expect{ card.touch_out("Kings Cross")}.to change{card.balance}.by (-4)
     #   card = Oystercard.new
     #   card.top_up(10)
     #   card.touch_in
@@ -57,9 +57,22 @@ end
     #   expect(card.balance).to eq(6)
     # end
   end
+
+  it "returns station as nil when you touch out" do
+    card = Oystercard.new
+    card.touch_out("Kings Cross")
+    expect(card.touch_out("Kings Cross")).to be_nil
+  end
+
 end
 
 
+  it "stores the entry station" do
+    card = Oystercard.new
+    card.top_up(10)
+    card.touch_in("Farringdon")
+    expect(card.entry_station).to eq "Farringdon"
+  end
 
   # describe "#deduct" do
   #   it 'subtracts money from the balance' do
